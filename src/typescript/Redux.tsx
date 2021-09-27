@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { validationLoginCredencial } from '../actions/auth';
 import { useForms } from '../hooks/useForms';
 
@@ -8,15 +8,20 @@ export const Redux = () => {
 
     const dispatch = useDispatch();
 
+    // @ts-ignore
+    const { loading } = useSelector(state => state.ui)
+
     const { usuario, password, changeImput } = useForms({
         usuario: '',
         password: ''
     });
 
+
     const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch( validationLoginCredencial(usuario,password) );
     }
+    
 
     return (
         <div>
@@ -45,6 +50,7 @@ export const Redux = () => {
                 <button
                     className="btn btn-primary"
                     type="submit"
+                    disabled={loading}
                 >
                     Login
                 </button>

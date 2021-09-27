@@ -24,7 +24,7 @@ enum AuthTypes {
 
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 
-    const { type , payload } = action;
+    const { type, payload } = action;
 
     switch (type) {
         case AuthTypes.logout:
@@ -40,12 +40,47 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 
 }
 
+
+const inicialStateTest: TestState = {
+    numero: 30
+}
+
+interface TestState {
+    numero: number
+}
+
+interface TestAction {
+    accion: string,
+    payload: TestState
+}
+
+const testReducer = (state: TestState, action: TestAction): TestState => {
+
+    const { accion , payload } = action;
+
+    switch (accion) {
+        case 'sumar':
+            return {
+                numero: (payload.numero + 1)
+            };
+        case 'restar':
+            return {
+                numero: (payload.numero - 1)
+            };
+        default:
+            return state;
+    }
+}
+
+
 export const Reducer = () => {
     const mountedRef = useRef(true);
     const [{ validando, token, nombre }, dispatch] = useReducer(authReducer, inicialState);
+    const [{ numero : numeroVista }, dispatchReducer] = useReducer(testReducer, inicialStateTest);
+
     const login = () => {
 
-        const loginPerson : AuthState = {
+        const loginPerson: AuthState = {
             validando: false,
             token: 5526,
             nombre: 'Daniel G'
@@ -89,7 +124,6 @@ export const Reducer = () => {
     }, [])
 
 
-
     if (validando) {
         return (
             <>
@@ -116,20 +150,70 @@ export const Reducer = () => {
                     ? (
                         <>
                             <div className="alert alert-success">Autenticado como: {nombre}</div>
-                            <button className="btn btn-danger" onClick={ logout }>
+                            <button className="btn btn-danger" onClick={logout}>
                                 Logout
                             </button>
+
+                            <button
+                                className="btn btn-primary" 
+                                style={{ marginLeft :10 }}
+                                onClick={
+                                    () => {
+
+                                        const valorAnt: TestState = {
+                                            numero : numeroVista
+                                        }
+
+
+                                        const sumando: TestAction = {
+                                            accion: 'sumar',
+                                            payload: valorAnt
+                                        }
+
+                                        dispatchReducer(sumando)
+                                    }
+                                }
+                            >
+                                Sumar
+                            </button>
+
+                            <button
+                                className="btn btn-primary" 
+                                style={{ marginLeft :10 }}
+                                onClick={
+                                    () => {
+
+                                        const valorAnt: TestState = {
+                                            numero : numeroVista
+                                        }
+
+
+                                        const restando: TestAction = {
+                                            accion: 'restar',
+                                            payload: valorAnt
+                                        }
+
+                                        dispatchReducer(restando)
+                                    }
+                                }
+                            >
+                                Restar
+                            </button>
+
+                            <b style={{ marginLeft :10 }} >Valor : {numeroVista}</b>
                         </>
                     )
                     : (
                         <>
                             <div className="alert alert-danger">No autenticado</div>
-                            <button className="btn btn-primary" onClick={ login }>
+                            <button className="btn btn-primary" onClick={login}>
                                 Login
                             </button>
                         </>
                     )
             }
+
+
         </div>
     )
 }
