@@ -10,6 +10,7 @@ import { Funciones } from '../typescript/Funciones';
 import { Memo } from '../typescript/Memo';
 import { ObjetosLiterales } from '../typescript/ObjetosLiterales';
 import { Reducer } from '../typescript/Reducer';
+import { Redux } from '../typescript/Redux';
 import { RutaUrl } from '../typescript/RutaUrl';
 import { TiposBasicos } from '../typescript/TiposBasicos';
 import { Urls } from '../typescript/Urls';
@@ -60,6 +61,9 @@ export const RouterLinks = () => {
             <li>
               <Link to={"/rutaurl/ValorParam"}>Parametro por URL</Link>
             </li>
+            <li>
+              <Link to={"/reduxLogin"}>Redux - Login</Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -78,6 +82,7 @@ export const RouterLinks = () => {
           <Route exact path="/formularios" component={Formularios} />
           <Route exact path="/memo" component={Memo} />
           <Route exact path="/rutaurl/:id" component={RutaUrl} />
+          <Route exact path="/reduxLogin" component={Redux} />
         </Switch>
       </div>
     </Router>
