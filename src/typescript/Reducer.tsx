@@ -12,7 +12,7 @@ const inicialState: AuthState = {
     nombre: null
 }
 
-type AuthAction = {
+interface AuthAction {
     type: AuthTypes,
     payload: AuthState | null
 }
