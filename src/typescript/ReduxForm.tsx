@@ -25,8 +25,8 @@ export const ReduxForm = () => {
     return (
         <>
         <hr/>
-        <p>Usuario: Daniel</p>
-        <p>Pass: 123456</p>
+        <p>Usuario: {process.env.REACT_APP_USUARIO}</p>
+        <p>Pass: {process.env.REACT_APP_PASS}</p>
         <form onSubmit={handleLogin}>
             <input
                 type="text"

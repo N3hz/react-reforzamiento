@@ -49,15 +49,19 @@ export const logout = () => ({
 const loginValidation = async (usuario, password) => {
     return new Promise((resolve, reject) => {
         setTimeout(function() {
-            if(usuario==="Daniel" && password==="123456"){
+
+            //AQUI DEBERIA IR A LA BD A CONSULTAR POR EL USUARIO
+
+            if(usuario===process.env.REACT_APP_USUARIO && password===process.env.REACT_APP_PASS){
                 const resultadoValidacion = {
                     id: 64332,
-                    name: 'Daniel'
+                    name: process.env.REACT_APP_USUARIO 
                 }
                 resolve(resultadoValidacion);
             }else{
                 reject("Error de login");
             }
+
         }, 3000);
     })
 }
