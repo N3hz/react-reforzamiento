@@ -1,11 +1,11 @@
-import { types } from '../types/authTypes';
+import { typesUI } from '../types/authTypes';
 
 export const startlogin = () => ({
-    type: types.uiStartLoading,
+    type: typesUI.uiStartLoading,
     payload: null
 });
 
 export const finishlogin = () => ({
-    type: types.uiFinishLoading,
+    type: typesUI.uiFinishLoading,
     payload: null
 });
