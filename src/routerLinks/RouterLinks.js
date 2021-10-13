@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,13 +12,20 @@ import { Memo } from '../typescript/Memo';
 import { ObjetosLiterales } from '../typescript/ObjetosLiterales';
 import { Reducer } from '../typescript/Reducer';
 import { Redux } from '../typescript/Redux';
+import { RutaProtegida } from '../typescript/RutaProtegida';
 import { RutaUrl } from '../typescript/RutaUrl';
 import { TiposBasicos } from '../typescript/TiposBasicos';
 import { Urls } from '../typescript/Urls';
 import { UseStates } from '../typescript/UseStates';
 import { Usuarios } from '../typescript/Usuarios';
+import { PrivateRoute } from './PrivateRoute';
 
 export const RouterLinks = () => {
+
+
+  // @ts-ignore
+  const { ucode } = useSelector(state => state.auth)
+
   return (
     <Router>
       <div className="row">
@@ -83,6 +91,10 @@ export const RouterLinks = () => {
           <Route exact path="/memo" component={Memo} />
           <Route exact path="/rutaurl/:id" component={RutaUrl} />
           <Route exact path="/reduxLogin" component={Redux} />
+          <PrivateRoute path="/rutaProtegida"
+            component={RutaProtegida}
+            isAutenticated={ucode}
+          />
         </Switch>
       </div>
     </Router>
