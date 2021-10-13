@@ -23,6 +23,10 @@ export const ReduxForm = () => {
     }
 
     return (
+        <>
+        <hr/>
+        <p>Usuario: Daniel</p>
+        <p>Pass: 123456</p>
         <form onSubmit={handleLogin}>
             <input
                 type="text"
@@ -50,5 +54,6 @@ export const ReduxForm = () => {
                 Login
             </button>
         </form> 
+        </>
     )
 }
