@@ -6,18 +6,18 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import { Formularios } from '../typescript/Formularios';
-import { Funciones } from '../typescript/Funciones';
-import { Memo } from '../typescript/Memo';
-import { ObjetosLiterales } from '../typescript/ObjetosLiterales';
-import { Reducer } from '../typescript/Reducer';
-import { Redux } from '../typescript/Redux';
-import { RutaProtegida } from '../typescript/RutaProtegida';
-import { RutaUrl } from '../typescript/RutaUrl';
-import { TiposBasicos } from '../typescript/TiposBasicos';
-import { Urls } from '../typescript/Urls';
-import { UseStates } from '../typescript/UseStates';
-import { Usuarios } from '../typescript/Usuarios';
+import { Formularios } from '../components/Formularios';
+import { Funciones } from '../components/Funciones';
+import { Memo } from '../components/Memo';
+import { ObjetosLiterales } from '../components/ObjetosLiterales';
+import { Reducer } from '../components/Reducer';
+import { Redux } from '../components/Redux';
+import { RutaProtegida } from '../components/RutaProtegida';
+import { RutaUrl } from '../components/RutaUrl';
+import { TiposBasicos } from '../components/TiposBasicos';
+import { Urls } from '../components/Urls';
+import { UseStates } from '../components/UseStates';
+import { Usuarios } from '../components/Usuarios';
 import { PrivateRoute } from './PrivateRoute';
 
 export const RouterLinks = () => {
