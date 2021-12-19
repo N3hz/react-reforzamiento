@@ -8,7 +8,7 @@ export const Memo = () => {
     const [verdaderoFalso, setverdaderoFalso] = useState(true);
 
     const procesoPruebas = (  ) => {    
-       for (let index = 0; index < 3; index++) {
+       for (let index = 0; index < 2; index++) {
            console.log('Iteracion : ' + index);
        } 
     }

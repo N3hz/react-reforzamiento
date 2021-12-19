@@ -6,6 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { FetchImage } from '../components/FetchImage';
 import { Formularios } from '../components/Formularios';
 import { Funciones } from '../components/Funciones';
 import { Memo } from '../components/Memo';
@@ -72,12 +73,15 @@ export const RouterLinks = () => {
             <li>
               <Link to={"/reduxLogin"}>Redux - Login</Link>
             </li>
+            <li>
+              <Link to={"/fetchImage"}>Fetch Image</Link>
+            </li>
           </ul>
         </div>
       </div>
 
 
-
+      <hr/>
       <div>
         <Switch>
           <Route exact path="/urls" component={Urls} />
@@ -91,6 +95,7 @@ export const RouterLinks = () => {
           <Route exact path="/memo" component={Memo} />
           <Route exact path="/rutaurl/:id" component={RutaUrl} />
           <Route exact path="/reduxLogin" component={Redux} />
+          <Route exact path="/fetchImage" component={FetchImage} />
           <PrivateRoute path="/rutaProtegida"
             component={RutaProtegida}
             isAutenticated={ucode}

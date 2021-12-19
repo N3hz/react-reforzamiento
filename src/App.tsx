@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <h1>React</h1>
-      <hr />
+      <br />
       <Provider store={store}>
         <RouterLinks />
       </Provider>
