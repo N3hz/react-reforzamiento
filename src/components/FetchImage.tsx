@@ -1,7 +1,14 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from "react";
+import { reqResApi } from "../api/reqRes";
 import { useForms } from "../hooks/useForms";
+import { IData, IReqRes } from "../hooks/useUsuarios";
 
 export const FetchImage = () => {
+
+  const [busquedaHecha, setBusquedaHecha] = useState('');
+
+  const [listaRealizada, setListaRealizada] = useState<IData[]>([]);
 
   const { busqueda, changeImput } = useForms({
     busqueda: "",
@@ -11,21 +18,29 @@ export const FetchImage = () => {
 
 
   useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
-            .then(response => response.json())
-            .then(json => console.log(json))
-  }, [historialBusqueda])
+        reqResApi.get<IReqRes>('/users')
+        .then( resp => {
+            const listaPersonas = resp.data.data;
+            const listaFiltrada = listaPersonas.filter( x => 
+               x.first_name.toUpperCase().includes(busquedaHecha.toUpperCase()) 
+            || x.last_name.toUpperCase().includes(busquedaHecha.toUpperCase()) 
+            || x.email.toUpperCase().includes(busquedaHecha.toUpperCase()) 
+            );
+            setListaRealizada(listaFiltrada);
+            console.log(listaFiltrada)
+        })
+        .catch(console.log);
+  }, [busquedaHecha])
 
 
   const llamarBusqueda = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
-    if(busqueda!==""){
-        const lista : number = historialBusqueda.length > 5 ? 1 : 0; 
-        const nuevoArray = historialBusqueda.slice(lista,historialBusqueda.length);
-        nuevoArray.push(busqueda);
-        changeImput("", "busqueda");
-        setHistorialBusqueda(nuevoArray);
-    }
+    setBusquedaHecha(busqueda);
+    const lista : number = historialBusqueda.length > 5 ? 1 : 0; 
+    const nuevoArray = historialBusqueda.slice(lista,historialBusqueda.length);
+    busqueda!=="" ? nuevoArray.push(busqueda) : nuevoArray.push("TODOS");
+    setHistorialBusqueda(nuevoArray);
+    changeImput("", "busqueda");
   };
 
   return (
@@ -71,6 +86,28 @@ export const FetchImage = () => {
         </div>
         <div className="col-3">
             <h2 className="col-12">Resultados</h2>
+            <table className="table table-dark" style={{ width: 600 }}>
+                <thead>
+                    <tr>
+                        <th>Avatar</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        listaRealizada.map((Objeto, index) => {
+                            return (
+                                <tr key={index}>
+                                    <th><img src={ Objeto.avatar } /></th>
+                                    <th>{ Objeto.first_name } { Objeto.last_name }</th>
+                                    <th>{ Objeto.email } </th>
+                                </tr>
+                            );
+                        })
+                    }
+                </tbody>
+            </table>
         </div>
       </div>
     </>
